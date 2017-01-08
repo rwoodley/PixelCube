@@ -23,7 +23,7 @@ ffmpeg -i extract.mp4 -filter:v "crop=400:400:530:300" out.mp4
 
 Build stills, they must be named filenameNNN.jpg where NNN goes from 0 to number of frames:
 ```
-ffmpeg -i out.mp4  filename%03d.jpg
+ffmpeg -i out.mp4  frames/filename%03d.jpg
 ```
 
 Run the python program. It outputs 400 frames labelled outNNN.jpg. If there are fewer than 400 frames, it loops. If there are more, it ignores.
@@ -32,7 +32,7 @@ python slice_cube.py
 ```
 Combine the frames into a new video:
 ```
-ffmpeg -framerate 30 -i out%03d.jpg outputY.mp4
+ffmpeg -framerate 30 -i frames/out%03d.jpg outputY.mp4
 ```
 
 If the original was less than 400 frames long you can extend it so you can place it side by side with the others if you want. Ours was 3.75 seconds long which is 112 frames. Loop to get 400 frames which is 13.39 seconds approx.
