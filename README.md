@@ -28,12 +28,14 @@ ffmpeg -i out.mp4  frames/filename%03d.jpg
 
 Run the python program. It outputs 400 frames labelled outNNN.jpg. If there are fewer than 400 frames, it loops. If there are more, it ignores.
 ```
-python slice_cube.py
+python slice_cube.py YSlice
 ```
 Combine the frames into a new video:
 ```
 ffmpeg -framerate 30 -i frames/out%03d.jpg outputY.mp4
 ```
+
+Repeat the above 2 commands, but use `XSlice` and `outputX`.
 
 If the original was less than 400 frames long you can extend it so you can place it side by side with the others if you want. Ours was 3.75 seconds long which is 112 frames. Loop to get 400 frames which is 13.39 seconds approx.
 ```
