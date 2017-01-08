@@ -2,7 +2,17 @@
 
 Take a video with resolution NxN that has N frames. That is your pixel cube. This app will allow you to slice the cube along any plane.
 
-# To build the cube, you have to work with ffmpeg and run the python program slice_cube.py.
+Python package requirement is PIL. Build your virtual environment and install PIL with these instructions:
+```
+sudo pip install virtualenv
+virtualenv env
+source env/bin/activate
+pip install Image
+```
+
+# How-To/Example
+
+To build the cube, you have to work with ffmpeg and run the python program slice_cube.py.
 
 In this example we're aiming for a 400x400x400 cube. We have a starting image with the wrong resolution and the wrong number of frames. Not a cube, in other words.
 
@@ -25,7 +35,7 @@ Combine the frames into a new video:
 ffmpeg -framerate 30 -i out%03d.jpg outputY.mp4
 ```
 
-If the original was less thatn 400 frames long you can extend it so you can play it side by side with the others if you want. Ours was 3.75 seconds long which is 112 frames. Loop to get 400 frames which is 13.39 seconds approx.
+If the original was less than 400 frames long you can extend it so you can place it side by side with the others if you want. Ours was 3.75 seconds long which is 112 frames. Loop to get 400 frames which is 13.39 seconds approx.
 ```
 ffmpeg -re -f lavfi -i "movie=filename=out.mp4:loop=4, setpts=N/(FRAME_RATE*TB)" loop.mp4
 ffmpeg -i loop.mp4 -ss 00:00:00 -t 00:00:13.39 loopTruncated.mp4
